@@ -47,12 +47,9 @@ export default function Categorias() {
   async function buscarCategorias() {
     setLoading(true);
     try {
-      const res = await fetch(
-        `${process.env.API_DOMAIN}:${process.env.API_PORT}/categorias`,
-        {
-          headers: { Authorization: `Bearer ${user?.token}` },
-        }
-      );
+      const res = await fetch(`${process.env.API_DOMAIN}/categorias`, {
+        headers: { Authorization: `Bearer ${user?.token}` },
+      });
       if (!res.ok) throw new Error();
       const dados = await res.json();
       setCategorias(dados);
@@ -91,8 +88,8 @@ export default function Categorias() {
 
     const metodo = editarCategoria ? 'PUT' : 'POST';
     const url = editarCategoria
-      ? `${process.env.API_DOMAIN}:${process.env.API_PORT}/categorias/${editarCategoria.id}`
-      : `${process.env.API_DOMAIN}:${process.env.API_PORT}/categorias`;
+      ? `${process.env.API_DOMAIN}/categorias/${editarCategoria.id}`
+      : `${process.env.API_DOMAIN}/categorias`;
 
     try {
       const res = await fetch(url, {
@@ -139,7 +136,7 @@ export default function Categorias() {
 
     try {
       const res = await fetch(
-        `${process.env.API_DOMAIN}:${process.env.API_PORT}/categorias/${categoriaParaExcluir.id}`,
+        `${process.env.API_DOMAIN}/categorias/${categoriaParaExcluir.id}`,
         {
           method: 'DELETE',
           headers: { Authorization: `Bearer ${user?.token}` },

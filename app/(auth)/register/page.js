@@ -38,18 +38,15 @@ export default function Register() {
     });
 
     try {
-      const res = await fetch(
-        `${process.env.API_DOMAIN}:${process.env.API_PORT}/usuarios`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            nome: formValues.name,
-            email: formValues.email,
-            senha: formValues.password,
-          }),
-        }
-      );
+      const res = await fetch(`${process.env.API_DOMAIN}/usuarios`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: formValues.name,
+          email: formValues.email,
+          senha: formValues.password,
+        }),
+      });
 
       const data = await res.json();
 

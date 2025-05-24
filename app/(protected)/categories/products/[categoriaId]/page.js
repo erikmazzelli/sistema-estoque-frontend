@@ -56,12 +56,9 @@ export default function ProdutosPorCategoria() {
 
   const fetchProdutos = async () => {
     try {
-      const res = await fetch(
-        `${process.env.API_DOMAIN}:${process.env.API_PORT}/produtos`,
-        {
-          headers: { Authorization: `Bearer ${user?.token}` },
-        }
-      );
+      const res = await fetch(`${process.env.API_DOMAIN}/produtos`, {
+        headers: { Authorization: `Bearer ${user?.token}` },
+      });
       const data = await res.json();
       const filtrados = data?.filter(
         p => String(p.categoria_id) === String(categoriaId)
@@ -81,7 +78,7 @@ export default function ProdutosPorCategoria() {
 
       try {
         const categoriaRes = await fetch(
-          `${process.env.API_DOMAIN}:${process.env.API_PORT}/categorias/${categoriaId}`,
+          `${process.env.API_DOMAIN}/categorias/${categoriaId}`,
           {
             headers: { Authorization: `Bearer ${user?.token}` },
           }
@@ -153,22 +150,19 @@ export default function ProdutosPorCategoria() {
 
   const registrarMovimento = async () => {
     try {
-      const res = await fetch(
-        `${process.env.API_DOMAIN}:${process.env.API_PORT}/movimentos`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${user?.token}`,
-          },
-          body: JSON.stringify({
-            produto_id: produtoSelecionado.id,
-            tipo_movimento: tipoMovimento,
-            quantidade: parseInt(quantidade),
-            observacao,
-          }),
-        }
-      );
+      const res = await fetch(`${process.env.API_DOMAIN}/movimentos`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user?.token}`,
+        },
+        body: JSON.stringify({
+          produto_id: produtoSelecionado.id,
+          tipo_movimento: tipoMovimento,
+          quantidade: parseInt(quantidade),
+          observacao,
+        }),
+      });
 
       if (!res.ok) throw new Error('Erro ao registrar movimento');
       setSnackbar({
@@ -187,8 +181,8 @@ export default function ProdutosPorCategoria() {
     try {
       const metodo = modalCriacaoAberto ? 'POST' : 'PUT';
       const url = modalCriacaoAberto
-        ? `${process.env.API_DOMAIN}:${process.env.API_PORT}/produtos`
-        : `${process.env.API_DOMAIN}:${process.env.API_PORT}/produtos/${produtoSelecionado.id}`;
+        ? `${process.env.API_DOMAIN}/produtos`
+        : `${process.env.API_DOMAIN}/produtos/${produtoSelecionado.id}`;
 
       const res = await fetch(url, {
         method: metodo,
@@ -222,7 +216,7 @@ export default function ProdutosPorCategoria() {
   const excluirProduto = async () => {
     try {
       const res = await fetch(
-        `${process.env.API_DOMAIN}:${process.env.API_PORT}/produtos/${produtoSelecionado.id}`,
+        `${process.env.API_DOMAIN}/produtos/${produtoSelecionado.id}`,
         {
           method: 'DELETE',
           headers: { Authorization: `Bearer ${user?.token}` },

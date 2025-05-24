@@ -60,12 +60,9 @@ export default function DashboardPage() {
   useEffect(() => {
     async function fetchCategorias() {
       try {
-        const res = await fetch(
-          `${process.env.API_DOMAIN}:${process.env.API_PORT}/categorias`,
-          {
-            headers: { Authorization: `Bearer ${user?.token}` },
-          }
-        );
+        const res = await fetch(`${process.env.API_DOMAIN}/categorias`, {
+          headers: { Authorization: `Bearer ${user?.token}` },
+        });
         const data = await res.json();
         setCategorias(data);
       } catch (e) {
@@ -78,12 +75,9 @@ export default function DashboardPage() {
   useEffect(() => {
     async function fetchProdutos() {
       try {
-        const res = await fetch(
-          `${process.env.API_DOMAIN}:${process.env.API_PORT}/produtos`,
-          {
-            headers: { Authorization: `Bearer ${user?.token}` },
-          }
-        );
+        const res = await fetch(`${process.env.API_DOMAIN}/produtos`, {
+          headers: { Authorization: `Bearer ${user?.token}` },
+        });
         const data = await res.json();
         setProdutos(data);
       } catch (e) {

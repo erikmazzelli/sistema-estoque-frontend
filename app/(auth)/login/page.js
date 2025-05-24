@@ -34,17 +34,14 @@ export default function Login() {
     setFormState({ error: '', loading: true });
 
     try {
-      const res = await fetch(
-        `${process.env.API_DOMAIN}:${process.env.API_PORT}/login`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: formValues.email,
-            senha: formValues.password,
-          }),
-        }
-      );
+      const res = await fetch(`${process.env.API_DOMAIN}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formValues.email,
+          senha: formValues.password,
+        }),
+      });
 
       const data = await res.json();
 

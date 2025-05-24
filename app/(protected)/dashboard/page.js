@@ -97,9 +97,7 @@ export default function DashboardPage() {
           params.append('categoria_id', filtroCategoria);
         if (filtroData) params.append('data', filtroData);
 
-        const url = `${process.env.API_DOMAIN}:${
-          process.env.API_PORT
-        }/movimentos?${params.toString()}`;
+        const url = `${process.env.API_DOMAIN}/movimentos?${params.toString()}`;
         const res = await fetch(url, {
           headers: { Authorization: `Bearer ${user?.token}` },
         });
